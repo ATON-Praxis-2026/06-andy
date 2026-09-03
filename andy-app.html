@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Andy — </title>
+<style>
+:root{--blue:#0867d9;--purple:#7456d9;--green:#138a4b;--ink:#18212b;--muted:#697586;--line:#e4e8ee;--bg:#f7f9fc;--white:#fff;--soft:#eef5ff;--greenbg:#eaf7ef;--amber:#a36b00;--amberbg:#fff6df;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}
+.app{min-height:100vh;display:flex}.sidebar{display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0;width:228px;background:#fff;border-right:1px solid var(--line);padding:25px 15px;z-index:4}.brand{display:flex;align-items:center;gap:2.84px;margin:0 10px 36px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:21px;line-height:1;font-weight:600;letter-spacing:-.045em;color:#1e252d}.brand svg{width:27px;height:27px;flex:0 0 auto}.nav button{width:100%;border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:8px;color:#687382;margin:2px 0}.nav button.active,.nav button:hover{background:var(--soft);color:var(--blue);font-weight:700}.sidefoot{position:absolute;left:24px;right:20px;bottom:22px;color:#8b95a3;font-size:11px;line-height:1.5}
+.main{margin-left:228px;width:calc(100% - 228px);padding:30px 42px 60px}.view{max-width:1120px;margin:auto}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:25px}.detail-top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:18px}.detail-top .back{margin-bottom:0}.top-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--purple);font-weight:800}.title{font-size:30px;letter-spacing:-.035em;margin:5px 0}.sub{color:var(--muted);line-height:1.5}.date{color:var(--muted);font-size:12px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:24px}.metric{background:#fff;border:1px solid var(--line);border-radius:13px;padding:17px}.metric b{font-size:24px;display:block}.metric span{font-size:12px;color:var(--muted);margin-top:3px;display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:13px}.pad{padding:20px}.section{display:flex;align-items:center;justify-content:space-between;margin:23px 0 11px}.section h2{font-size:16px;margin:0}.section small{color:var(--muted)}
+.feed{display:grid;gap:12px}.opp{display:grid;grid-template-columns:45px 1fr auto;gap:14px;padding:18px 20px}.rank{width:40px;height:40px;border-radius:9px;background:var(--soft);color:var(--blue);display:grid;place-items:center;font-weight:800}.client{font-weight:750}.meta{font-size:12px;color:var(--muted);margin-top:3px}.opline{margin-top:8px;font-size:14px}.reason{font-size:12px;color:#596575;line-height:1.5;margin-top:5px}.score{text-align:right}.score b{font-size:18px}.pill{display:inline-block;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:800;margin-top:6px}.high{background:var(--greenbg);color:var(--green)}.med{background:var(--amberbg);color:var(--amber)}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;padding:9px 12px;font-size:12px;font-weight:650}.primary{background:var(--blue);border-color:var(--blue);color:#fff}.positive{background:var(--green);border-color:var(--green);color:#fff}.danger{color:var(--red)}.buttons{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
+.hidden{display:none!important}.back{border:0;background:none;color:var(--blue);padding:0;margin-bottom:18px}.hero{padding:23px;margin-bottom:14px}.herohead{display:flex;justify-content:space-between;gap:20px}.hero h2{font-size:25px;margin:5px 0}.tag{color:var(--purple);font-size:11px;font-weight:800}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card h3{font-size:13px;margin:0 0 12px}.fact{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f0f2f5;font-size:12px}.fact span{color:var(--muted)}.why{display:flex;gap:7px;flex-wrap:wrap}.why span{background:var(--soft);color:#2d5d96;padding:7px 9px;border-radius:7px;font-size:11px}.message{background:#f8f9fb;border:1px solid var(--line);border-radius:9px;padding:15px;line-height:1.6;font-size:13px}.timeline{border-left:2px solid #dce5f1;margin-left:6px;padding-left:17px;display:grid;gap:13px;font-size:12px}.timeline div{position:relative}.timeline div:before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--purple);left:-22px;top:4px}
+.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:11px;border-bottom:1px solid var(--line)}.table th{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.upload{max-width:760px;margin:65px auto;text-align:center}.drop{background:#fff;border:1.5px dashed #b8c3d2;border-radius:16px;padding:48px 30px;margin-top:24px}.drop .icon{font-size:38px;color:var(--blue)}.drop h2{font-size:19px}.drop p{color:var(--muted);font-size:13px}.file{display:none}
+.processing{max-width:650px;margin:110px auto}.progress{height:7px;background:#e8edf3;border-radius:9px;overflow:hidden;margin:28px 0}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--purple));transition:.65s}.steps{display:grid;gap:10px;color:var(--muted);font-size:13px}.steps .done{color:var(--green)}
+.result{padding:18px}.result h3{margin:0 0 5px}.result p{margin:0;color:var(--muted);font-size:12px}
+.login{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:10}.login-card{width:min(410px,calc(100% - 40px));background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px;box-shadow:0 15px 50px #18212b12}.login-card h1{font-size:24px;margin:0 0 8px}.login-card p{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 23px}.field{margin-bottom:15px}.field label{display:block;font-size:11px;font-weight:750;margin-bottom:6px}.field input{width:100%;border:1px solid #d6dce5;border-radius:8px;padding:11px 12px;outline:none}.login-submit{width:100%;border:0;background:var(--blue);color:#fff;border-radius:8px;padding:12px;font-weight:750;margin-top:3px}.login-note{text-align:center;color:#8a94a3;font-size:10px;margin-top:15px}
+.toast{position:fixed;right:25px;bottom:25px;background:#18212b;color:#fff;border-radius:9px;padding:11px 14px;font-size:12px;opacity:0;transform:translateY(8px);transition:.2s;z-index:20}.toast.show{opacity:1;transform:none}
+@media(max-width:820px){.sidebar{display:none}.main{margin:0;width:100%;padding:22px}.top{flex-wrap:wrap}.detail-top{align-items:flex-start}.top-actions{width:100%;justify-content:flex-end}.metrics{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.opp{grid-template-columns:40px 1fr}.score{grid-column:2;text-align:left}}
+
+.global-import{position:static;display:flex;align-items:center;gap:7px;padding:9px 14px;border:1px solid var(--blue);border-radius:8px;background:var(--blue);color:#fff;font-size:12px;font-weight:700;white-space:nowrap;box-shadow:none}
+.global-import:hover{border-color:#0759bc;background:#0759bc}
+.import-modal{position:fixed;inset:0;background:rgba(24,33,43,.34);display:flex;align-items:center;justify-content:center;padding:20px;z-index:30}
+.import-modal.hidden{display:none}
+.import-dialog{width:min(620px,100%);background:#fff;border-radius:16px;border:1px solid var(--line);box-shadow:0 20px 70px rgba(24,33,43,.18);padding:24px}
+.import-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:20px}.import-head h2{font-size:19px;margin:0 0 5px}.import-head p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}
+.close-modal{border:0;background:#f4f6f8;border-radius:7px;width:34px;height:34px;font-size:20px;color:#667281}
+.import-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px}
+.import-option{border:1px solid var(--line);border-radius:11px;padding:16px;text-align:left;background:#fff}
+.import-option:hover{border-color:#b9c8da;background:#fbfdff}.import-option b{display:block;font-size:13px}.import-option span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.import-drop{border:1.5px dashed #bac5d3;border-radius:11px;padding:25px;text-align:center}.import-drop strong{display:block;font-size:13px}.import-drop span{display:block;color:var(--muted);font-size:11px;margin:5px 0 12px}
+.import-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+@media(max-width:820px){.main{padding-top:22px}.import-options{grid-template-columns:1fr}}
+
+</style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<style>
+.import-confirm{margin-top:14px;padding:12px 14px;border:1px solid var(--line);background:var(--wash);font-size:12px;line-height:1.45}
+.import-confirm b{color:var(--brand)}
+.import-file-name{font-weight:600;color:var(--ink)}
+.import-count{font-variant-numeric:tabular-nums}
+.client-search{margin-bottom:12px;width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:6px;font:inherit}
+.empty-state{padding:30px;text-align:center;color:var(--ink3)}
+.demo-note{font-size:11px;color:var(--ink3);margin-top:8px}
+</style>
+
+<style>
+.nav{display:flex;flex-direction:column;gap:3px;flex:0 0 auto}
+.nav .import-nav{order:-1;margin-bottom:3px}
+.nav .import-nav button{color:var(--ink)}
+.nav .import-nav button:hover{background:var(--wash)}
+.nav .import-nav .navicon{color:#0b83c6}
+.score{min-width:104px;text-align:right}
+.score b{font-size:28px;line-height:1;font-weight:800;letter-spacing:-.04em;display:block}
+.tempbar{height:6px;width:112px;border-radius:999px;margin:9px 0 7px auto;background:linear-gradient(90deg,#8bb8d1 0%,#6aa6c8 28%,#d4a95b 68%,#d96a55 100%);position:relative}
+.tempbar .temp-dot{position:absolute;top:50%;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.22);transform:translate(-50%,-50%)}
+.pill.high{background:#fbe4df;color:#b94d3e;border-color:#f1c7bf}
+.pill.med{background:#f6ecd8;color:#9b7129;border-color:#ead7ad}
+.pill.low{background:#e7f0f5;color:#3d7895;border-color:#cedfe9}
+.metric b{font-size:29px;line-height:1;letter-spacing:-.04em;font-weight:800}
+.metric span{margin-top:8px}
+#plan .metrics,#opps .metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+#plan .metrics .metric:nth-child(5){grid-column:auto}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tag{display:inline-flex;align-items:center;padding:4px 8px;border:1px solid #cbdce7;border-radius:999px;background:#f4f8fb;color:#426174;font-size:10px;font-weight:700;line-height:1.1}
+.user-footer{margin-top:auto;padding:16px 8px 0;border-top:1px solid var(--line);display:flex;align-items:center;gap:9px}
+.user-avatar{width:34px;height:34px;border-radius:50%;background:#dcecf5;color:#006394;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex:0 0 auto}
+.user-meta{min-width:0;flex:1}.user-meta strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.user-meta span{display:block;font-size:10px;color:var(--ink3);margin-top:2px}
+.logout{border:0;background:transparent;color:var(--ink3);font-size:11px;font-weight:700;cursor:pointer;padding:6px 4px}.logout:hover{color:var(--ink)}
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.filterbar select,.filterbar button{height:34px;padding:0 10px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
+.filterbar button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.import-live{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0 4px}
+.live-stat{padding:14px 15px;border:1px solid #cfe2ee;background:linear-gradient(135deg,#f5fbfe,#eef6fa);border-radius:7px}
+.live-stat b{display:block;font-size:24px;line-height:1.05;letter-spacing:-.035em;color:#006394}.live-stat span{display:block;margin-top:5px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#667583;font-weight:700}
+@media(max-width:980px){#plan .metrics,#opps .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.import-live{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#plan .metrics,#opps .metrics{grid-template-columns:1fr 1fr}.import-live{grid-template-columns:1fr}.tempbar{margin-left:auto}}
+</style>
+
+<style>
+.import-live{
+  display:flex!important;
+  min-height:44px;
+  margin:18px 0 10px;
+  align-items:center;
+  justify-content:flex-start;
+}
+.live-line{
+  font-size:18px;
+  line-height:1.2;
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  opacity:0;
+  transform:translateY(7px);
+  transition:opacity .28s ease,transform .28s ease;
+}
+.live-line.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.live-line .live-number{
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:-.04em;
+  color:#006394;
+  margin-right:5px;
+}
+</style>
+
+<style>
+.nav .import-nav{margin-bottom:2px}
+.nav .import-nav button{width:100%;display:flex;align-items:center;gap:10px}
+.nav .import-nav .navicon{font-size:18px;line-height:1;color:#0b83c6}
+</style>
+
+<style>
+.nav .import-nav{margin-bottom:4px}
+.nav .import-sidebar-btn{
+  width:100%;display:flex;align-items:center;gap:9px;
+  justify-content:flex-start;padding:10px 12px;border:1px solid #087fbe;
+  border-radius:6px;background:#0b83c6;color:#fff;font-weight:700;
+  box-shadow:none;cursor:pointer;
+}
+.nav .import-sidebar-btn:hover{background:#0876ae}
+.nav .import-sidebar-btn .navicon{font-size:18px;line-height:1;color:#fff}
+</style>
+
+<style>
+.import-modal-card{width:min(460px,calc(100vw - 32px));padding:28px}
+.import-modal-card h2{margin:6px 0 8px;font-size:24px;letter-spacing:-.03em}
+.modal-copy{margin:0 0 20px;color:var(--ink2);font-size:13px;line-height:1.5}
+.upload-zone{
+  min-height:150px;border:1.5px dashed #b9cdd9;border-radius:8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;background:#f8fbfd;cursor:pointer;text-align:center
+}
+.upload-zone:hover{border-color:#0b83c6;background:#f3f9fc}
+.upload-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#e1f0f7;color:#087fbe;font-size:20px;font-weight:800;margin-bottom:4px}
+.upload-zone strong{font-size:13px;color:var(--ink)}
+.upload-zone span:last-child{font-size:11px;color:var(--ink3)}
+.import-status{min-height:18px;margin-top:10px;font-size:11px;color:var(--ink3)}
+.modal-actions{display:flex;justify-content:flex-end;margin-top:8px}
+</style>
+
+<style id="import-button-fix">
+.nav .import-nav .import-sidebar-btn,
+.nav .import-nav .import-sidebar-btn span,
+.nav .import-nav .import-sidebar-btn .navicon {
+  color:#fff !important;
+}
+.nav .import-nav .import-sidebar-btn {
+  background:#0b83c6 !important;
+  border-color:#0b83c6 !important;
+}
+.nav .import-nav .import-sidebar-btn:hover {
+  background:#0876ae !important;
+  border-color:#0876ae !important;
+}
+</style>
+
+<style id="modal-layer-fix">
+body.modal-open{overflow:hidden}
+#importModal{
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  height:100vh !important;
+  z-index:2147483647 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:24px !important;
+  box-sizing:border-box !important;
+  background:rgba(15,28,38,.48) !important;
+}
+#importModal.hidden{display:none !important}
+#importModal .modal-card{
+  position:relative !important;
+  z-index:2147483648 !important;
+  margin:0 !important;
+  max-height:calc(100vh - 48px) !important;
+  overflow:auto !important;
+}
+.import-modal-card{width:min(460px,calc(100vw - 32px))}
+</style>
+
+<style id="modal-white-card-fix">
+#importModal .import-modal-card{
+  display:block !important;
+  background:#ffffff !important;
+  background-color:#ffffff !important;
+  border:1px solid #dbe4ea !important;
+  border-radius:10px !important;
+  box-shadow:0 24px 70px rgba(15,28,38,.22) !important;
+  color:#17232d !important;
+  opacity:1 !important;
+  width:min(460px,calc(100vw - 32px)) !important;
+  padding:28px !important;
+}
+#importModal .import-modal-card h2{
+  color:#17232d !important;
+}
+#importModal .import-modal-card .modal-copy{
+  color:#60707c !important;
+}
+#importModal .import-modal-card .eyebrow{
+  color:#0b83c6 !important;
+}
+#importModal .import-modal-card .upload-zone{
+  background:#f8fbfd !important;
+  border:1.5px dashed #b9cdd9 !important;
+  color:#17232d !important;
+}
+#importModal .import-modal-card .upload-zone strong{
+  color:#17232d !important;
+}
+#importModal .import-modal-card .upload-zone span:last-child{
+  color:#71808a !important;
+}
+#importModal .import-modal-card .close-modal{
+  color:#60707c !important;
+  background:transparent !important;
+}
+#importModal .import-modal-card .btn{
+  background:#ffffff !important;
+  color:#17232d !important;
+  border:1px solid #cfdbe2 !important;
+}
+</style>
+<style id="final-processing-fix">
+#importModal .import-modal-card{position:relative!important}
+#importModal .close-modal{position:absolute!important;top:12px!important;right:12px!important;width:32px!important;height:32px!important;padding:0!important;margin:0!important;display:flex!important;align-items:center!important;justify-content:center!important;border:0!important;border-radius:7px!important;background:transparent!important;color:#667281!important;font-size:22px!important;line-height:1!important;z-index:5!important}
+#importModal .close-modal:hover{background:#f1f4f6!important;color:#18212b!important}
+.processing-final-message{display:none;text-align:center;padding:8px 0 20px;font-size:22px;line-height:1.3;font-weight:750;letter-spacing:-.025em;color:var(--ink)}
+.processing-final-message .amount{font-size:30px;font-weight:850;color:var(--blue);letter-spacing:-.04em}
+.processing-complete .progress,.processing-complete .steps,.processing-complete #liveInsight{display:none!important}
+.processing-complete .processing-final-message{display:block!important}
+</style>
+<style id="processing-final-hero">
+.processing-complete .processing-headline{
+  display:none!important;
+}
+.processing-complete .processing-final-message{
+  display:block!important;
+  font-size:34px!important;
+  line-height:1.15!important;
+  font-weight:800!important;
+  letter-spacing:-.045em!important;
+  text-align:center!important;
+  padding:28px 10px 34px!important;
+}
+.processing-complete .processing-final-message .amount{
+  display:block!important;
+  font-size:58px!important;
+  line-height:1!important;
+  font-weight:850!important;
+  letter-spacing:-.055em!important;
+  margin-bottom:12px!important;
+}
+</style>
+
+<style id="monthly-opportunity-fix">
+  #plan .monthly-opportunity{
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+  }
+  #plan .monthly-opportunity-value{
+    color: var(--blue);
+    font: inherit;
+    font-weight: inherit;
+  }
+</style>
+
+
+<style id="monthly-opportunity-two-lines">
+  #plan .title .greeting-line,
+  #plan .title .monthly-opportunity {
+    display: block;
+    font: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+  #plan .title .monthly-opportunity-value {
+    color: var(--blue);
+    font: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+</style>
+
+</head>
+<body>
+<div id="login" class="login">
+  <div class="login-card">
+    <h1>Fazer login</h1>
+    <p> para transformar sua carteira em oportunidades de expansão.</p>
+    <div class="field"><label>E-mail</label><input id="email" type="email" placeholder="voce@empresa.com"></div>
+    <div class="field"><label>Senha</label><input id="password" type="password" placeholder="••••••••"></div>
+    <button class="login-submit" onclick="enter()">Entrar</button>
+    <div class="login-note"></div>
+  </div>
+</div>
+
+<div id="importModal" class="modal hidden" aria-hidden="true">
+  <div class="modal-card import-modal-card" role="dialog" aria-modal="true" aria-labelledby="importTitle">
+    <button class="close-modal" type="button" onclick="closeImportModal(true)" aria-label="Fechar">×</button>
+    <div class="eyebrow">Importar carteira</div>
+    <h2 id="importTitle">Atualize sua carteira</h2>
+    <p class="modal-copy">Envie sua planilha para o Andy analisar os clientes e identificar novas oportunidades.</p>
+    <label class="upload-zone" for="globalFile">
+      <span class="upload-icon">↑</span>
+      <strong>Selecionar arquivo</strong>
+      <span>CSV, XLS ou XLSX</span>
+    </label>
+    <input id="globalFile" type="file" accept=".csv,.xls,.xlsx" style="display:none">
+    <div id="importStatus" class="import-status"></div>
+    <div class="modal-actions">
+      <button class="btn" type="button" onclick="closeImportModal(true)">Cancelar</button>
+    </div>
+  </div>
+</div>
+<div id="app" class="app" style="display:none">
+<aside class="sidebar">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-label="Andy"><path fill="var(--blue)" fill-rule="evenodd" d="M0 16A16 16 0 1 0 32 16A16 16 0 1 0 0 16ZM9.617 23.066L16.0157 12.826A2.7 2.7 0 0 0 11.4362 9.9644L5.0375 20.2044A2.7 2.7 0 0 0 9.617 23.066ZM20.5638 22.0356L26.9625 11.7956A2.7 2.7 0 0 0 22.383 8.934L15.9843 19.174A2.7 2.7 0 0 0 20.5638 22.0356Z"/></svg>
+    <span>Andy</span>
+  </div>
+  <nav class="nav">
+    
+     
+     <div class="navitem import-nav">
+       <button type="button" class="import-sidebar-btn" onclick="openImportModal(); return false;">
+         <span class="navicon">＋</span><span>Importar</span>
+       </button>
+     </div>
+     <button class="active" data-view="plan">Pauta de hoje</button>
+    <button data-view="opps">Oportunidades</button>
+    <button data-view="clients">Clientes</button>
+    <button data-view="history">Histórico</button>
+  </nav>
+  
+   <div class="user-footer"><div class="user-avatar">DG</div><div class="user-meta"><strong>Diego</strong><span>Assessor · Administrador</span></div><button class="logout" onclick="logout()">Sair</button></div>
+</aside>
+
+<main class="main">
+<section id="plan" class="view">
+  <div class="top"><div><div class="eyebrow">Andy · </div><h1 class="title">
+  <span class="greeting-line">Bom dia, Diego</span>
+  <span class="monthly-opportunity">você tem oportunidade de fazer <span id="todayMonthlyOpportunity" class="monthly-opportunity-value">R$ 0</span> este mês</span>
+</h1><div class="sub">Analisamos <b>200 clientes</b> e encontramos <b>23 oportunidades</b>. Estas são as que merecem atenção agora.</div></div><div class="top-actions"></div></div>
+  <div class="metrics"><div class="metric"><b>200</b><span>clientes analisados</span></div><div class="metric"><b>6</b><span>oportunidades prioritárias</span></div><div class="metric"><b>R$ 2,4 mi</b><span>potencial estimado</span></div><div class="metric"><b>7</b><span>clientes para abordar</span></div></div>
+  <div class="section"><h2>Pauta de hoje</h2><small>Potencial × relevância × urgência × confiança</small></div>
+  <div id="planFeed" class="feed"></div>
+</section>
+
+<section id="opps" class="view hidden">
+  <div class="top"><div><div class="eyebrow">Opportunity Feed</div><h1 class="title">Oportunidades</h1><div class="sub">23 oportunidades encontradas pelo Andy. Explore, priorize e registre o resultado.</div></div></div>
+  <div class="metrics"><div class="metric"><b>23</b><span>encontradas</span></div><div class="metric"><b>12</b><span>priorizadas</span></div><div class="metric"><b>6</b><span>para hoje</span></div><div class="metric"><b>R$ 2,4 mi</b><span>potencial estimado</span></div></div>
+  <div class="section"><h2>Todas as oportunidades</h2><small>Não ordenadas apenas por patrimônio</small></div>
+  <div id="oppsFeed" class="feed"></div>
+</section>
+
+<section id="detail" class="view hidden">
+  <div class="detail-top"><button class="back" onclick="show('plan')">← Voltar para a pauta</button></div>
+  <div class="card hero"><div class="herohead"><div><div class="tag" id="dTag"></div><h2 id="dName"></h2><div class="sub" id="dMeta"></div></div><div class="score"><b id="dScore"></b><span class="pill high">CONFIANÇA</span></div></div><div class="buttons"><button id="contactButton" class="btn positive" onclick="openWhatsApp()">Entrar em contato</button><button class="btn" onclick="mark('Relevante')">Ganho</button><button class="btn danger" onclick="mark('Ignorada')">Perdido</button></div></div>
+  <div class="grid2">
+    <div class="card pad"><h3>Por que identificamos?</h3><p id="dWhy" class="sub"></p><div class="why" id="dSignals" style="margin-top:13px"></div></div>
+    <div class="card pad"><h3>Por que agora?</h3><p id="dNow" class="sub"></p></div>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card pad"><h3>Oportunidade</h3><div class="fact"><span>Necessidade potencial</span><b id="dNeed"></b></div><div class="fact"><span>Produto / categoria</span><b id="dProduct"></b></div><div class="fact"><span>Potencial estimado</span><b id="dPotential"></b></div></div>
+    <div class="card pad"><h3>Contexto do cliente</h3><p id="dContext" class="sub"></p></div>
+  </div>
+  <div class="card pad" style="margin-top:14px"><h3>Como abordar</h3><p id="dGoal" class="sub"></p><h3 style="margin-top:18px">Perguntas de descoberta</h3><div id="dQuestions" class="sub"></div></div>
+  <div class="card pad" style="margin-top:14px"><h3>Sugestão de abordagem</h3><div id="dMessage" class="message"></div><div class="buttons"><button class="btn primary" onclick="copyMessage()">Copiar abordagem</button></div></div>
+  <div class="card pad" style="margin-top:14px"><h3>Evidências / rastreabilidade</h3><div id="dTimeline" class="timeline"></div></div>
+</section>
+
+<section id="clients" class="view hidden">
+  <div class="top"><div><div class="eyebrow">Carteira</div><h1 class="title">Clientes</h1><div class="sub">Exploração da carteira analisada pelo Andy.</div></div></div>
+  <div class="filterbar" id="clientFilters">
+<select id="filterOpportunity"><option value="">Oportunidade: todas</option><option value="opps">Com oportunidade</option><option value="none">Sem oportunidade</option></select>
+<select id="filterProfile"><option value="">Perfil: todos</option><option>Conservador</option><option>Moderado</option><option>Arrojado</option><option>Agressivo</option></select>
+<select id="filterScore"><option value="">Score: todos</option><option value="80">≥ 80%</option><option value="65">≥ 65%</option><option value="50">≥ 50%</option></select>
+<select id="filterEvent"><option value="">Sinais: todos</option><option value="event">Com evento/contexto</option><option value="liquidity">Com liquidez</option></select>
+<button type="button" id="clearFilters">Limpar filtros</button></div><div class="card pad"><input id="clientSearch" class="client-search" placeholder="Buscar cliente, produto ou sinal..."><div class="demo-note" id="clientCount"></div><div style="overflow:auto;margin-top:10px"><table class="table"><thead><tr><th>ID</th><th>Cliente</th><th>AUM</th><th>Produtos</th><th>Perfil</th><th>Última interação</th><th>Liquidez</th><th>Concentração RF</th><th>Previdência</th><th>Evento / contexto</th><th>Sinal</th><th>Oportunidade</th><th>Potencial</th><th>Score</th></tr></thead><tbody id="clientsBody"></tbody></table></div></div>
+</section>
+
+<section id="history" class="view hidden">
+  <div class="top"><div><div class="eyebrow">Feedback loop</div><h1 class="title">Histórico</h1><div class="sub">Resultados comerciais alimentam a evolução futura das recomendações.</div></div></div>
+  <div class="metrics"><div class="metric"><b>42%</b><span>Opportunity Activation Rate</span></div><div class="metric"><b>18</b><span>contatos realizados</span></div><div class="metric"><b>6</b><span>reuniões agendadas</span></div><div class="metric"><b>2</b><span>conversões</span></div></div>
+  <div class="card pad"><h3>Opportunity-to-Revenue Loop</h3><div class="timeline"><div>Sinal → Insight</div><div>Insight → Oportunidade</div><div>Oportunidade → Ação</div><div>Ação → Resultado</div><div>Resultado → Aprendizado</div></div></div>
+</section>
+
+<section id="import" class="view hidden">
+  <div class="top"><div><div class="eyebrow">Dados da carteira</div><h1 class="title">Importar carteira</h1><div class="sub">Atualize os dados do Andy.</div></div></div>
+  <div class="upload"><div class="eyebrow">Dados da carteira</div><h1 class="title">Comece com os dados da sua carteira</h1><div class="sub">Você pode importar um CSV ou usar os dados de demonstração.</div><div class="drop"><div class="icon">↥</div><h2>Importe sua carteira</h2><p>Campos esperados: cliente, AUM, produtos, perfil, última interação e sinais comportamentais.</p><input id="file" class="file" type="file" accept=".csv,.xlsx"><button class="btn primary" onclick="document.getElementById('file').click()">Selecionar arquivo</button><button class="btn" onclick="runProcessing()">Usar dados de demonstração</button></div></div>
+</section>
+
+<section id="processing" class="view hidden">
+  <div class="processing">
+    <div class="eyebrow">Autopilot</div>
+    <h1 class="title processing-headline">Estamos procurando oportunidades que você provavelmente não encontraria sozinho.</h1>
+    <div class="import-live" id="importLiveStats" aria-live="polite">
+      <div class="live-line" id="liveInsight"></div>
+    </div>
+<div class="processing-final-message" id="processingFinalMessage"></div>
+<div class="progress"><i id="progress"></i></div>
+    <div class="steps">
+      <div id="p1">○ Importando clientes</div>
+      <div id="p2">○ Organizando dados</div>
+      <div id="p3">○ Analisando comportamento</div>
+      <div id="p4">○ Identificando gaps</div>
+      <div id="p5">○ Detectando sinais</div>
+      <div id="p6">○ Priorizando oportunidades</div>
+    </div>
+  </div>
+</section>
+</main></div>
+
+
+</div>
+</div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const data={
+mariana:{name:"Mariana Silva",meta:"CLI-001 · AUM R$ 2,4 mi",score:"87%",tag:"OPORTUNIDADE DE DIVERSIFICAÇÃO",why:"A cliente possui concentração elevada em renda fixa e apresentou aumento relevante de liquidez nos últimos 60 dias.",now:"R$ 180 mil de liquidez foram identificados recentemente. O timing é favorável para uma conversa de descoberta sobre o destino desse capital.",signals:["Liquidez recente","Concentração","AUM relevante","Mudança recente"],need:"Diversificação",product:"Alternativos / renda variável",potential:"R$ 180 mil",context:"Mariana possui patrimônio de R$ 2,4 milhões. A carteira está concentrada em renda fixa e houve aumento de liquidez recente.",goal:"Abrir uma conversa de descoberta sobre o destino da liquidez, sem apresentar o produto como recomendação definitiva.",questions:["Você possui algum objetivo específico para esse capital?","Como você está avaliando sua exposição atual?","Existe algum horizonte em que pretende utilizar esse recurso?"],phone:"5511900000000",message:"Mariana, tudo bem? Vi a movimentação recente na sua carteira e queria aproveitar para revisarmos juntos a alocação. Acho que vale olharmos com calma para os próximos passos. Você consegue falar comigo esta semana?"},
+carlos:{name:"Carlos Mendes",meta:"CLI-002 · AUM R$ 1,8 mi",score:"84%",tag:"OPORTUNIDADE DE CROSS-SELL",why:"Carlos tem 48 anos, não possui previdência identificada e houve conversa recente sobre planejamento de aposentadoria.",now:"A conversa sobre aposentadoria ocorreu em 17/08. O contexto ainda é recente e existe um gap claro na carteira.",signals:["48 anos","Gap de produto","Interesse em aposentadoria","Contato recente"],need:"Planejamento previdenciário",product:"Plano Horizonte Prev Plus",potential:"R$ 100 mil",context:"Carlos possui patrimônio de R$ 1,8 milhão em fundos e renda fixa. O cadastro não apresenta previdência.",goal:"Retomar o tema de planejamento de longo prazo e entender se existe uma necessidade antes de apresentar alternativas.",questions:["Como você está pensando sua aposentadoria hoje?","Você já possui alguma estrutura previdenciária fora da carteira?","Qual horizonte você imagina para esse planejamento?"],phone:"5511900000000",message:"Carlos, tudo bem? Fiquei pensando naquele ponto que conversamos sobre organizar melhor seu planejamento de longo prazo. Podemos conversar esta semana?"},
+eduardo:{name:"Eduardo Costa",meta:"CLI-003 · AUM R$ 4,1 mi",score:"81%",tag:"PREPARAÇÃO DE RELACIONAMENTO",why:"O aniversário de 60 anos se aproxima, há dois filhos registrados e o patrimônio vem crescendo.",now:"O aniversário ocorre em 12 dias. O Andy recomenda preparar a conversa e não fazer uma abordagem comercial imediata.",signals:["Evento em 12 dias","60 anos","2 filhos","Patrimônio crescente"],need:"Planejamento patrimonial",product:"Family Legacy",potential:"R$ 500 mil+",context:"Eduardo tem patrimônio de R$ 4,1 milhões, relacionamento ativo e dois filhos registrados.",goal:"Preparar uma conversa consultiva sobre planejamento patrimonial, respeitando o timing do relacionamento.",questions:["Como você imagina a organização do patrimônio para os próximos anos?","Existe algum planejamento familiar que gostaria de revisar?","Há algum objetivo que ainda não discutimos?"],phone:"5511900000000",message:"Eduardo, tudo bem? Queria aproveitar nossa próxima conversa para retomarmos alguns pontos do seu planejamento patrimonial. Podemos reservar um tempo para isso?"}
+};
+
+let importedRows=[];
+let importedFileName="Carteira atual";
+let selectedOpportunity=null;
+let demoLoaded=false;
+let hasImportedSpreadsheet=false;
+
+function seedInitialPortfolio(){
+ importedRows=[];
+ importedFileName="Nenhuma carteira importada";
+ demoLoaded=false;
+ hasImportedSpreadsheet=false;
+}
+
+function enter(){document.getElementById("login").style.display="none";document.getElementById("app").style.display="flex";seedInitialPortfolio();show("plan")}
+function show(id){
+ document.querySelectorAll(".view").forEach(v=>v.classList.add("hidden"));
+ const target=document.getElementById(id); if(target) target.classList.remove("hidden");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
+ if(id==="plan") renderPlan();
+ if(id==="opps") renderOpportunities();
+ if(id==="clients") renderClients(importedRows);
+ if(id==="history") renderHistory();
+}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>show(b.dataset.view));
+
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function fmtMoneyMil(v){return v?("R$ "+Number(v).toLocaleString("pt-BR")+" mil"):"—"}
+function fmtHeadlineMoney(potentialMil){
+ if(!potentialMil)return "R$ 0";
+ return "R$ "+(potentialMil/1000).toFixed(1).replace(".",",")+" mi";
+}
+function scoreClass(s){return Number(s)>=80?"high":"med"}
+function opportunityLabel(r){return r.oportunidade&&r.oportunidade!=="—"?r.oportunidade:"Sem oportunidade prioritária"}
+function opportunityProduct(r){
+ if(r.produtos.includes("Previdência")||r.oportunidade==="Previdência") return "Plano Horizonte Prev Plus";
+ if(r.oportunidade==="Planejamento patrimonial") return "Family Legacy";
+ if(r.oportunidade==="Diversificação internacional") return "Global Equity Access";
+ if(r.oportunidade==="Proteção patrimonial") return "Proteção Patrimonial";
+ if(r.oportunidade==="Diversificação de carteira") return "Alternativos / renda variável";
+ return "—";
+}
+function makeGenericOpportunity(r){
+ const score=Number(r.score)||50;
+ const product=opportunityProduct(r);
+ const potential=Number(r.potencial)||Number(r.liquidez)||0;
+ const signal=r.sinal||"Sinal comportamental identificado";
+ const isEduardo=(r.evento||"").toLowerCase().includes("aniversário");
+ let tag="OPORTUNIDADE IDENTIFICADA";
+ if(r.oportunidade==="Previdência") tag="OPORTUNIDADE DE CROSS-SELL";
+ else if(r.oportunidade==="Planejamento patrimonial") tag="PREPARAÇÃO DE RELACIONAMENTO";
+ else if(r.oportunidade==="Diversificação de carteira"||r.oportunidade==="Diversificação internacional") tag="OPORTUNIDADE DE DIVERSIFICAÇÃO";
+ return {
+   name:r.cliente, phone:"551199"+String(r.id||"").replace(/\D/g,"").padStart(8,"0").slice(-8), meta:`${r.id} · AUM ${fmtMoneyMil(r.aum)}`, score:score+"%", tag,
+   why:`O Andy cruzou ${r.sinal||"sinais recentes"} com perfil, carteira e gaps de produto.`,
+   now:isEduardo?"O evento temporal está próximo; o Andy recomenda preparar o contato em vez de fazer uma abordagem comercial imediata.":`O sinal foi identificado recentemente e indica um momento adequado para uma conversa de descoberta.`,
+   signals:[r.signal||"Sinal recente",r.perfil||"Perfil",r.aum>=2000?"AUM relevante":"Movimentação"],
+   need:r.oportunidade||"Revisão de carteira", product, potential:potential?fmtMoneyMil(potential):"A definir",
+   context:`${r.cliente} possui patrimônio de ${fmtMoneyMil(r.aum)}. Produtos atuais: ${r.produtos||"não informado"}. Perfil: ${r.perfil||"não informado"}. Última interação: ${r.interacao||"não informado"}.`,
+   goal:"Abrir uma conversa de descoberta baseada no sinal identificado, sem apresentar a oportunidade como recomendação definitiva.",
+   questions:["Esse movimento está ligado a algum objetivo específico?","Como você está avaliando sua posição atual?","Existe algum horizonte ou necessidade que deveríamos considerar?"],
+   message:`${r.cliente}, tudo bem? Queria aproveitar um ponto recente da sua carteira para revisarmos juntos alguns próximos passos. Acho que vale olharmos com calma para o que faz sentido para você. Podemos conversar esta semana?`
+ };
+}
+function opportunityFromRow(r){
+ if(!r) return null;
+ if(r.id==="CLI-001") return data.mariana;
+ if(r.id==="CLI-002") return data.carlos;
+ if(r.id==="CLI-003") return data.eduardo;
+ return makeGenericOpportunity(r);
+}
+function opportunityRows(){
+ return importedRows.filter(r=>r.oportunidade&&r.oportunidade!=="—").sort((a,b)=>(b.score||0)-(a.score||0));
+}
+function renderPlan(){
+ const total=importedRows.length;
+ const oppRows=opportunityRows();
+ const top=oppRows.slice(0,6);
+ const potential=oppRows.reduce((s,r)=>s+(Number(r.potencial)||0),0);
+ const metrics=document.querySelectorAll("#plan .metric b");
+ if(metrics.length>=4){
+   metrics[0].textContent=total;
+   metrics[1].textContent=top.length;
+   metrics[2].textContent="R$ "+(potential/1000).toFixed(1).replace(".",",")+" mi";
+   metrics[3].textContent=oppRows.length;
+ }
+ const sub=document.querySelector("#plan .sub");
+ if(sub) sub.innerHTML=hasImportedSpreadsheet ? `Analisamos <b>${total}</b> clientes após a importação de <b>200 novos registros</b>. Encontramos <b>${oppRows.length}</b> oportunidades. Estas são as que merecem atenção agora.` : `Você tem <b>${total}</b> clientes na carteira atual. O Andy já está priorizando os sinais que merecem atenção.`;
+ const headline=document.getElementById("todayMonthlyOpportunity");
+ if(headline) headline.textContent=hasImportedSpreadsheet ? fmtHeadlineMoney(potential) : "R$ 0";
+ const feed=document.getElementById("planFeed");
+ if(!feed)return;
+ feed.innerHTML=top.map((r,i)=>`<article class="card opp">
+  <div class="rank">${String(i+1).padStart(2,"0")}</div>
+  <div><div class="client">${esc(r.cliente)}</div><div class="meta">${esc(r.id)} · AUM ${fmtMoneyMil(r.aum)}</div>
+  <div class="tagrow"><span class="tag">${esc(opportunityLabel(r))}</span><span class="tag">${esc(opportunityProduct(r))}</span>${r.perfil?`<span class="tag">${esc(r.perfil)}</span>`:""}</div>
+  <div class="reason">${esc(r.sinal)}</div>
+  <div class="buttons"><button class="btn primary" onclick="openRowOpp('${esc(r.id)}')">Ver oportunidade →</button></div></div>
+  <div class="score"><b>${r.score||0}%</b><div class="tempbar"><span class="temp-dot" style="left:${Math.max(8,Math.min(96,Number(r.score)||0))}%"></span></div><span class="pill ${scoreClass(r.score)}">${Number(r.score)>=80?"ALTA":Number(r.score)>=65?"MÉDIA":"PREPARAR"}</span></div>
+ </article>`).join("") || '<div class="card pad"><div class="empty-state">Nenhuma oportunidade prioritária encontrada.</div></div>';
+}
+function renderOpportunities(){
+ const rows=opportunityRows();
+ const potential=rows.reduce((s,r)=>s+(Number(r.potencial)||0),0);
+ const metrics=document.querySelectorAll("#opps .metric b");
+ if(metrics.length>=4){
+   metrics[0].textContent=importedRows.length;
+   metrics[1].textContent=rows.length;
+   metrics[2].textContent=Math.min(6,rows.length);
+   metrics[3].textContent="R$ "+(potential/1000).toFixed(1).replace(".",",")+" mi";
+ }
+ const sub=document.querySelector("#opps .sub");
+ if(sub) sub.textContent=`${rows.length} oportunidades encontradas pelo Andy. Explore, priorize e registre o resultado.`;
+ const feed=document.getElementById("oppsFeed");
+ feed.innerHTML=rows.map((r,i)=>`<article class="card opp">
+  <div class="rank">${String(i+1).padStart(2,"0")}</div>
+  <div><div class="client">${esc(r.cliente)}</div><div class="meta">AUM ${fmtMoneyMil(r.aum)}</div>
+  <div class="tagrow"><span class="tag">${esc(r.oportunidade)}</span><span class="tag">${esc(opportunityProduct(r))}</span>${r.perfil?`<span class="tag">${esc(r.perfil)}</span>`:""}</div>
+  <div class="reason">${esc(r.sinal)}</div>
+  <div class="buttons"><button class="btn primary" onclick="openRowOpp('${esc(r.id)}')">Ver oportunidade →</button></div></div>
+  <div class="score"><b>${r.score||0}%</b><div class="tempbar"><span class="temp-dot" style="left:${Math.max(8,Math.min(96,Number(r.score)||0))}%"></span></div><span class="pill ${scoreClass(r.score)}">${Number(r.score)>=80?"ALTA":Number(r.score)>=65?"MÉDIA":"PREPARAR"}</span></div>
+ </article>`).join("") || '<div class="card pad"><div class="empty-state">Nenhuma oportunidade encontrada.</div></div>';
+}
+function openRowOpp(id){
+ const row=importedRows.find(r=>r.id===id);
+ if(!row)return;
+ selectedOpportunity=row;
+ const d=opportunityFromRow(row);
+ show("detail");
+ for(const [id2,val] of [["dTag",d.tag],["dName",d.name],["dMeta",d.meta],["dScore",d.score],["dWhy",d.why],["dNow",d.now],["dNeed",d.need],["dProduct",d.product],["dPotential",d.potential],["dContext",d.context],["dGoal",d.goal],["dMessage",d.message]]) document.getElementById(id2).textContent=val;
+ document.getElementById("contactButton").dataset.phone="5511900000000";
+ document.getElementById("dSignals").innerHTML=d.signals.filter(Boolean).map(x=>"<span>✓ "+esc(x)+"</span>").join("");
+ document.getElementById("dQuestions").innerHTML=d.questions.map(x=>"• "+esc(x)).join("<br>");
+ document.getElementById("dTimeline").innerHTML=[
+  `<div><b>${esc(row.interacao||"Recente")}</b> · última interação registrada</div>`,
+  `<div><b>Dados importados</b> · sinais cruzados com perfil, carteira e gaps</div>`,
+  `<div><b>Agora</b> · oportunidade priorizada pelo Opportunity Engine</div>`
+ ].join("");
+}
+function openOpp(k){openRowOpp(importedRows.find(r=>r.id===({mariana:"CLI-001",carlos:"CLI-002",eduardo:"CLI-003"}[k]||""))?.id)}
+function toast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2200)}
+function mark(t){toast("✓ "+t+" registrado.")}
+function openWhatsApp(){
+ const phone="5511900000000";
+ const message=document.getElementById("dMessage")?.textContent||"";
+ const url="https://wa.me/"+phone+"?text="+encodeURIComponent(message);
+ window.open(url,"_blank","noopener,noreferrer");
+ toast("Abrindo WhatsApp com a abordagem pronta.");
+}
+function copyMessage(){navigator.clipboard?.writeText(document.getElementById("dMessage").textContent);toast("Abordagem copiada.")}
+
+function openImportModal(){
+  const modal=document.getElementById("importModal");
+  if(!modal)return;
+  modal.classList.remove("hidden");
+  modal.style.display="flex";
+  modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
+  const status=document.getElementById("importStatus");
+  if(status)status.textContent="";
+  const input=document.getElementById("globalFile");
+  if(input)input.value="";
+  setTimeout(()=>document.querySelector("#importModal .close-modal")?.focus(),30);
+}
+function closeImportModal(goHome=false){
+  const modal=document.getElementById("importModal");
+  if(modal){
+    modal.classList.add("hidden");
+    modal.style.display="none";
+    modal.setAttribute("aria-hidden","true");
+  }
+  document.body.classList.remove("modal-open");
+  if(goHome)show("plan");
+}
+function chooseFile(type){document.getElementById("globalFile").click()}
+function runImportDemo(){closeImportModal();appendDemoSpreadsheet();runProcessing()}
+
+function normalizeKey(v){return String(v||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+function parseMoney(v){
+ if(typeof v==="number") return v;
+ const s=String(v||"").replace(/[^\d,.-]/g,"").replace(/\./g,"").replace(",",".");
+ return Number(s)||0;
+}
+function normalizeRows(jsonRows){
+ return jsonRows.filter(r=>Object.values(r).some(v=>String(v||"").trim()!=="")).map((r,i)=>{
+   const out={}; Object.keys(r).forEach(k=>out[normalizeKey(k)]=r[k]);
+   return {
+    id: out["cliente id"] || out["id"] || "CLI-"+String(i+1).padStart(3,"0"),
+    cliente: out["cliente"] || "Cliente "+String(i+1).padStart(3,"0"),
+    aum: parseMoney(out["aum (r$ mil)"] ?? out["aum"]),
+    produtos: out["produtos"] || "",
+    perfil: out["perfil"] || "",
+    interacao: out["última interação"] ?? out["ultima interação"] ?? out["ultima interacao"] ?? "",
+    liquidez: parseMoney(out["liquidez recente (r$ mil)"] ?? out["liquidez recente"]),
+    concentracao: Number(out["concentração rf (%)"] ?? out["concentracao rf (%)"] ?? 0),
+    previdencia: out["previdência"] ?? out["previdencia"] ?? "",
+    evento: out["evento / contexto"] ?? out["evento"] ?? "",
+    sinal: out["sinal comportamental"] ?? out["sinal"] ?? "",
+    oportunidade: out["oportunidade"] || "—",
+    potencial: parseMoney(out["potencial (r$ mil)"] ?? out["potencial"]),
+    score: Number(out["score"]||0)
+   };
+ });
+}
+async function handleFile(file){
+ importedFileName=file.name;
+ document.getElementById("importStatus").textContent="Lendo "+file.name+"…";
+ closeImportModal();
+ if(typeof XLSX==="undefined"){toast("Leitor de Excel indisponível.");return}
+ try{
+   const buffer=await file.arrayBuffer();
+   const wb=XLSX.read(buffer,{type:"array"});
+   const sheet=wb.Sheets[wb.SheetNames[0]];
+   const json=XLSX.utils.sheet_to_json(sheet,{defval:""});
+   const spreadsheetRows=normalizeRows(json);
+   importedRows=mergeImportedRows(importedRows,spreadsheetRows);
+   demoLoaded=false;
+   hasImportedSpreadsheet=true;
+   importedFileName=file.name;
+   renderClients(importedRows);
+   runProcessing();
+ }catch(err){console.error(err);toast("Não foi possível ler a planilha.")}
+}
+document.getElementById("file").addEventListener("change",e=>{if(e.target.files.length)handleFile(e.target.files[0])});
+document.getElementById("globalFile")?.addEventListener("change",e=>{if(e.target.files.length)handleFile(e.target.files[0])});
+
+
+
+document.addEventListener("click",function(e){
+  const btn=e.target.closest(".import-sidebar-btn");
+  if(btn){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    openImportModal();
+  }
+});
+document.getElementById("importModal").addEventListener("click",e=>{
+  if(e.target===document.getElementById("importModal"))closeImportModal();
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!document.getElementById("importModal").classList.contains("hidden"))closeImportModal()});
+
+function appendDemoSpreadsheet(){
+ const added=Array.from({length:200},(_,i)=>({
+   id:"CLI-"+String(i+1).padStart(3,"0"),
+   cliente:i===0?"Mariana Silva":i===1?"Carlos Mendes":i===2?"Eduardo Costa":i===3?"Rafael Cavalcanti":"Cliente "+String(i+1).padStart(3,"0"),
+   aum:i===0?2400:i===1?1800:i===2?4100:i===3?3200:Math.round(350+Math.random()*7000),
+   produtos:i===0?"Renda fixa":i===1?"Fundos + RF":i===2?"Carteira diversificada":i===3?"Ações locais":"Carteira diversificada",
+   perfil:i===0?"Moderado":i===1?"Moderado":i===2?"Arrojado":i===3?"Moderado":"Moderado",
+   interacao:i===0?"18/06/2026":i===1?"17/08/2026":i===2?"08/08/2026":"—",
+   liquidez:i===0?180:0,
+   concentracao:i===0?78:i===1?52:i===2?34:i===3?61:40,
+   previdencia:i===0?"Não":i===1?"Não":i===2?"Sim":"Sim",
+   evento:i===0?"—":i===1?"Planejamento de aposentadoria":i===2?"Aniversário em 12 dias":"—",
+   sinal:i===0?"Liquidez recente + concentração em renda fixa":i===1?"Gap de previdência + conversa recente":i===2?"Aniversário de 60 anos + dois filhos":i===3?"Concentração local + ausência internacional":"Sem sinal prioritário",
+   oportunidade:i<23?["Diversificação de carteira","Previdência","Planejamento patrimonial","Diversificação internacional","Proteção patrimonial"][i%5]:"—",
+   potencial:i<23?[180,100,500,220,150][i%5]:0,
+   score:i<23?87-(i%12):Math.round(40+Math.random()*25)
+ }));
+ importedRows=mergeImportedRows(importedRows,added);
+ importedFileName="Andy_Carteira_Demo_200_Clientes.xlsx";
+ demoLoaded=true;
+ hasImportedSpreadsheet=true;
+}
+
+function mergeImportedRows(existing, added){
+ const ids=new Set(existing.map(r=>r.id));
+ return existing.concat(added.filter(r=>!ids.has(r.id)));
+}
+
+function loadDemoDataset(){
+ seedInitialPortfolio();
+}
+
+function renderClients(rows){
+ const body=document.getElementById("clientsBody"); if(!body)return;
+ const q=(document.getElementById("clientSearch")?.value||"").toLowerCase().trim();
+ const fOpp=document.getElementById("filterOpportunity")?.value||"";
+ const fProfile=document.getElementById("filterProfile")?.value||"";
+ const fScore=Number(document.getElementById("filterScore")?.value||0);
+ const fEvent=document.getElementById("filterEvent")?.value||"";
+ const filtered=rows.filter(r=>{
+   if(q&&!Object.values(r).join(" ").toLowerCase().includes(q)) return false;
+   if(fOpp==="opps"&&(!r.oportunidade||r.oportunidade==="—")) return false;
+   if(fOpp==="none"&&r.oportunidade&&r.oportunidade!=="—") return false;
+   if(fProfile&&r.perfil!==fProfile) return false;
+   if(fScore&&(Number(r.score)||0)<fScore) return false;
+   if(fEvent==="event"&&(!r.evento||r.evento==="—")) return false;
+   if(fEvent==="liquidity"&&(Number(r.liquidez)||0)<=0) return false;
+   return true;
+ });
+ body.innerHTML=filtered.map(r=>`<tr>
+ <td>${esc(r.id)}</td><td>${esc(r.cliente)}</td><td>${fmtMoneyMil(r.aum)}</td><td>${esc(r.produtos)}</td><td>${esc(r.perfil)}</td>
+ <td>${esc(r.interacao)}</td><td>${fmtMoneyMil(r.liquidez)}</td><td>${r.concentracao}%</td><td>${esc(r.previdencia)}</td>
+ <td>${esc(r.evento)}</td><td>${esc(r.sinal)}</td><td>${esc(r.oportunidade)}</td><td>${fmtMoneyMil(r.potencial)}</td><td>${r.score}%</td>
+ </tr>`).join("") || '<tr><td colspan="14" class="empty-state">Nenhum cliente encontrado.</td></tr>';
+ const count=document.getElementById("clientCount");
+ if(count) count.textContent=`${filtered.length} de ${rows.length} clientes · base importada: ${importedFileName}`;
+}
+document.getElementById("clientSearch")?.addEventListener("input",()=>renderClients(importedRows));
+["filterOpportunity","filterProfile","filterScore","filterEvent"].forEach(id=>document.getElementById(id)?.addEventListener("change",()=>renderClients(importedRows)));
+document.getElementById("clearFilters")?.addEventListener("click",()=>{["filterOpportunity","filterProfile","filterScore","filterEvent"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=""});const q=document.getElementById("clientSearch");if(q)q.value="";renderClients(importedRows)});
+
+function renderHistory(){
+ const rows=importedRows.length, opps=opportunityRows().length;
+ const activation=rows?Math.round((opps/rows)*100):0;
+ const metrics=document.querySelectorAll("#history .metric b");
+ if(metrics.length>=4){
+  metrics[0].textContent=Math.max(activation,18)+"%";
+  metrics[1].textContent=Math.min(opps,18);
+  metrics[2].textContent=Math.min(Math.round(opps*.33),6);
+  metrics[3].textContent=Math.min(Math.round(opps*.11),2);
+ }
+ const sub=document.querySelector("#history .sub");
+ if(sub) sub.textContent=`Resultados da carteira atual alimentam a evolução futura das recomendações. Base: ${importedFileName}.`;
+}
+
+function runProcessing(){
+  show("processing");
+  const processing=document.querySelector("#processing .processing");
+  processing?.classList.remove("processing-complete");
+  const progress=document.getElementById("progress");
+  if(progress)progress.style.width="0%";
+  const ids=["p1","p2","p3","p4","p5","p6"];
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.classList.remove("done");el.textContent="○ "+el.textContent.replace(/^✓ |^○ /,"");}
+  });
+
+  const total=importedRows.length||0;
+  const oppRows=opportunityRows();
+  const potential=oppRows.reduce((s,r)=>s+(Number(r.potencial)||0),0);
+  const signals=importedRows.filter(r=>(r.sinal&&r.sinal!=="Sem sinal prioritário")||(r.evento&&r.evento!=="—")||(Number(r.liquidez)||0)>0).length;
+  const insight=document.getElementById("liveInsight");
+
+  function showInsight(number,text){
+    if(!insight)return;
+    insight.classList.remove("show");
+    setTimeout(()=>{insight.innerHTML=`<span class="live-number">${number}</span>${text}`;insight.classList.add("show")},180);
+  }
+  function clearInsight(){if(insight){insight.classList.remove("show");setTimeout(()=>{insight.innerHTML=""},300)}}
+
+  showInsight(total,"clientes encontrados");
+  let i=0;
+  const timer=setInterval(()=>{
+    const el=document.getElementById(ids[i]);
+    if(el){el.classList.add("done");el.textContent="✓ "+el.textContent.replace(/^✓ |^○ /,"");}
+    if(progress)progress.style.width=((i+1)/ids.length*100)+"%";
+
+    if(i===0)showInsight(total,"clientes encontrados");
+    else if(i===1)showInsight(total,"clientes organizados");
+    else if(i===2)showInsight(signals,"sinais comportamentais encontrados");
+    else if(i===3)showInsight(oppRows.length,"oportunidades mapeadas");
+    else if(i===4)showInsight("R$ "+(potential/1000).toFixed(1).replace(".",",")+" mi","em oportunidades na mesa");
+    else if(i===5)showInsight(Math.min(6,oppRows.length),"oportunidades prioritárias");
+
+    i++;
+    if(i>=ids.length){
+      clearInterval(timer);
+      renderPlan();renderOpportunities();renderClients(importedRows);renderHistory();
+
+      const final=document.getElementById("processingFinalMessage");
+      if(final){
+        const formatted="R$ "+(potential/1000).toFixed(1).replace(".",",")+" mi";
+        final.innerHTML=`<span class="amount">${formatted}</span> de oportunidades deixadas na mesa mapeadas`;
+      }
+
+      setTimeout(()=>{
+        clearInsight();
+        processing?.classList.add("processing-complete");
+        setTimeout(()=>{
+          show("plan");
+          toast(`${importedRows.length} clientes processados · oportunidades priorizadas`);
+          processing?.classList.remove("processing-complete");
+        },3600);
+      },700);
+    }
+  },900);
+}
+function logout(){document.getElementById("app").style.display="none";document.getElementById("login").style.display="flex";seedInitialPortfolio();hasImportedSpreadsheet=false;selectedOpportunity=null;renderPlan();renderOpportunities();renderClients(importedRows);renderHistory();}
+
+seedInitialPortfolio();
+</script>
+<script id="andy-preimport-zero-state">
+document.addEventListener("DOMContentLoaded",function(){
+  if(typeof seedInitialPortfolio==="function")seedInitialPortfolio();
+  const metrics=document.querySelectorAll("#plan .metric b");
+  if(metrics.length>=4){
+    metrics[0].textContent="0";
+    metrics[1].textContent="0";
+    metrics[2].textContent="R$ 0";
+    metrics[3].textContent="0";
+  }
+  const oppMetrics=document.querySelectorAll("#opps .metric b");
+  if(oppMetrics.length>=4){
+    oppMetrics[0].textContent="0";
+    oppMetrics[1].textContent="0";
+    oppMetrics[2].textContent="0";
+    oppMetrics[3].textContent="R$ 0";
+  }
+  if(typeof renderPlan==="function")renderPlan();
+  if(typeof renderOpportunities==="function")renderOpportunities();
+  if(typeof renderClients==="function")renderClients([]);
+  if(typeof renderHistory==="function")renderHistory();
+});
+</script>
+
+
+
+
+</body>
+</html>
